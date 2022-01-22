@@ -1,3 +1,5 @@
+import { changeDirection } from "./controls.js"
+
 export class Snake {
     constructor(speed) {
         this.body = [{ x: 13, y: 13 }]
@@ -7,7 +9,7 @@ export class Snake {
     
     create() {
         let gameWorld = document.querySelector(".game-world")
-
+        gameWorld.innerHTML = ""
         this.body.forEach(snakePiece => {
             let snakeSection = document.createElement("div")
             snakeSection.style.gridRowStart = snakePiece.y
@@ -18,12 +20,13 @@ export class Snake {
     }
     
     move() {
+    let direction = changeDirection()
+
         for (let i = this.body.length - 2; i >=0; i--) {
             this.body[i + 1] = this.body[i]
         }
     
-        // used for testing movement 
-        // this.body[0].x += 1
-        // this.body[0].y += 0
+        this.body[0].x += direction.x
+        this.body[0].y += direction.y
     }
 }

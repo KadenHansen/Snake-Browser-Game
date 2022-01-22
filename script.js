@@ -1,6 +1,6 @@
 import { Snake } from "./snake.js"
 
-const greenSnake = new Snake(1)
+const greenSnake = new Snake(2)
 
 let currentFrame = 0
 let previousFrame = 0
