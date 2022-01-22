@@ -11,15 +11,26 @@ function main(frame) {
     if (currentFrame < 1 / snakeSpeed) return
     
     previousFrame = frame
+    gameWorld.innerHTML = ""
+    moveSnake()
     createSnake(gameWorld)
 }
 window.requestAnimationFrame(main)
 
+function moveSnake() {
+    for (let i = snake.length - 2; i >=0; i--) {
+        snake[i + 1] = snake[i]
+    }
+
+    // used for testing movement 
+    // snake.x += 0
+    // snake.y += 0
+}
 
 function createSnake(grid) {
     let snakeSection = document.createElement("div")
-    snakeSection.style.gridRowStart = snake.x
-    snakeSection.style.gridColumnStart = snake.y
+    snakeSection.style.gridRowStart = snake.y
+    snakeSection.style.gridColumnStart = snake.x
     snakeSection.classList.add("snake")
     grid.append(snakeSection)
 }
