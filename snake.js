@@ -4,7 +4,6 @@ export class Snake {
         this.bodyLength = this.body.length
         this.speed = speed
         this.direction = { x: 0, y: 0 }
-        this.previousDirection = null
     }
     
     create() {
@@ -32,24 +31,20 @@ export class Snake {
         window.addEventListener("keydown", e => {
             switch (e.key) {
                 case "ArrowUp": 
-                    if (this.previousDirection === "ArrowDown") break
+                    if (this.direction.y !== 0) break
                     this.direction = { x: 0, y: -1 }
-                    this.previousDirection = "ArrowUp"
                     break
                 case "ArrowDown": 
-                    if (this.previousDirection === "ArrowUp") break
+                    if (this.direction.y !== 0) break
                     this.direction = { x: 0, y: 1 }
-                    this.previousDirection = "ArrowDown"
                     break
                 case "ArrowLeft": 
-                    if (this.previousDirection === "ArrowRight") break
+                    if (this.direction.x !== 0) break
                     this.direction = { x: -1, y: 0 }
-                    this.previousDirection = "ArrowLeft"
                     break
                 case "ArrowRight": 
-                    if (this.previousDirection === "ArrowLeft") break
+                    if (this.direction.x !== 0) break
                     this.direction = { x: 1, y: 0 }
-                    this.previousDirection = "ArrowRight"
                     break
             }
         })
