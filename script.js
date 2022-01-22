@@ -1,6 +1,7 @@
 import { Snake } from "./snake.js"
 
 const greenSnake = new Snake(2)
+greenSnake.setControls()
 
 let currentFrame = 0
 let previousFrame = 0
