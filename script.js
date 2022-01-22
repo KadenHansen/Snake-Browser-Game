@@ -2,7 +2,8 @@ let currentFrame = 0
 let previousFrame = 0
 let snakeSpeed = 1
 let gameWorld = document.querySelector(".game-world")
-let snake = { x: 13, y: 13 }
+let snake = [{ x: 13, y: 13 }]
+let scoreDisplay = document.querySelector(".score")
 
 function main(frame) {
     
@@ -11,6 +12,9 @@ function main(frame) {
     if (currentFrame < 1 / snakeSpeed) return
     
     previousFrame = frame
+
+    let score = snake.length
+    scoreDisplay.innerHTML = `Score: ${score}`
     gameWorld.innerHTML = ""
     moveSnake()
     createSnake(gameWorld)
@@ -28,9 +32,11 @@ function moveSnake() {
 }
 
 function createSnake(grid) {
-    let snakeSection = document.createElement("div")
-    snakeSection.style.gridRowStart = snake.y
-    snakeSection.style.gridColumnStart = snake.x
-    snakeSection.classList.add("snake")
-    grid.append(snakeSection)
+    snake.forEach(snakePiece => {
+        let snakeSection = document.createElement("div")
+        snakeSection.style.gridRowStart = snakePiece.y
+        snakeSection.style.gridColumnStart = snakePiece.x
+        snakeSection.classList.add("snake")
+        grid.append(snakeSection)
+    })
 }

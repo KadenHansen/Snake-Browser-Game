@@ -8,6 +8,12 @@ body {
     background-color: black;
 }
 
+.score {
+    color: white;
+    position: absolute;
+    top: 0;
+}
+
 .game-world {
     width: 100vmin;
     height: 100vmin;
