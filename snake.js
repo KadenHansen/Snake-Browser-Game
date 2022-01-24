@@ -8,7 +8,12 @@ export class Snake {
     
     create() {
         let gameWorld = document.querySelector(".game-world")
-        gameWorld.innerHTML = ""
+        let snakePieces = document.querySelectorAll(".snake")
+        // gameWorld.innerHTML = ""
+        snakePieces.forEach(segment => {
+            segment.remove()
+        })
+
         this.body.forEach(snakePiece => {
             let snakeSection = document.createElement("div")
             snakeSection.style.gridRowStart = snakePiece.y

@@ -1,7 +1,10 @@
 import { Snake } from "./snake.js"
+import { Food } from "./food.js"
 
 const greenSnake = new Snake(2)
+let food = new Food()
 greenSnake.setControls()
+food.create()
 
 let currentFrame = 0
 let previousFrame = 0
