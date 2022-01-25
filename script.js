@@ -1,7 +1,7 @@
 import { Snake } from "./snake.js"
 import { Food } from "./food.js"
 
-const greenSnake = new Snake(2)
+const greenSnake = new Snake(4)
 let food = new Food()
 greenSnake.setControls()
 food.create()
@@ -15,6 +15,8 @@ function main(frame) {
     
     previousFrame = frame
     
+    onFood()
+        
     countScore()
     greenSnake.move()
     greenSnake.create()
@@ -25,4 +27,21 @@ function countScore() {
     let scoreDisplay = document.querySelector(".score")
     let score = greenSnake.bodyLength
     scoreDisplay.innerHTML = `Score: ${score}`
+}
+
+function isCollision(asset1, asset2) {
+    return asset1.some(segment => {
+        return (segment.x === asset2.x && segment.y === asset2.y)
+    })
+}
+
+function onFood() {
+    if (isCollision(greenSnake.body, food.coords)) {
+        console.log("food was eaten")
+        food.remove()
+        let newCoords = food.getNewCoords()
+        // let newCoords = food.createNewFood()
+        food.coords = { x: newCoords.x, y: newCoords.y }
+        food.create()
+    }
 }
