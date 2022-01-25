@@ -1,6 +1,6 @@
 export class Food {
-    constructor() {
-        this.coords = { x: 5, y: 20 }
+    constructor(startX, startY) {
+        this.coords = {x: 13, y: 5}
         this.gridSize = 25
     }
 
@@ -25,5 +25,12 @@ export class Food {
             x: Math.floor(Math.random() * this.gridSize + 1),
             y: Math.floor(Math.random() * this.gridSize + 1)
         }
+    }
+
+    reset() {
+        this.remove()
+        let newCoords = this.getNewCoords()
+        this.coords = { x: newCoords.x, y: newCoords.y }
+        this.create()
     }
 }

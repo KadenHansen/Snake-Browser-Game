@@ -52,4 +52,12 @@ export class Snake {
                 break
             }
         })
-    }}
+    }
+
+    reset() {
+        this.body = [{ x: 13, y: 13 }]
+        this.direction = { x: 0, y: 0 }
+    }
+
+
+}
