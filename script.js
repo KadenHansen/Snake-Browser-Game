@@ -56,6 +56,6 @@ function checkLose() {
         greenSnake.body[0].y > 25
     ) {
         greenSnake.reset()
-        console.log("you lose")
+        food.reset()
     }
 }
