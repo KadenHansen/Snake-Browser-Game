@@ -1,5 +1,5 @@
 export class Food {
-    constructor(startX, startY) {
+    constructor() {
         this.coords = {x: 13, y: 5}
         this.gridSize = 25
     }

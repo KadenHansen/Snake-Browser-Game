@@ -10,6 +10,7 @@ let food = new Food()
 let currentFrame = 0
 let previousFrame = 0
 
+// basic format for update loop from https://www.sitepoint.com/quick-tip-game-loop-in-javascript/
 function main(frame) {
     window.requestAnimationFrame(main)
     currentFrame = (frame - previousFrame) / 1000
@@ -18,9 +19,6 @@ function main(frame) {
     previousFrame = frame
     
     onFood()
-
-    console.log(greenSnake.bodyID)
-    console.log(greenSnake.bodyLength)
 
     countScore()
     greenSnake.move()
