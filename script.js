@@ -1,7 +1,7 @@
 import { Snake } from "./snake.js"
 import { Food } from "./food.js"
 
-const greenSnake = new Snake(3)
+const greenSnake = new Snake(5)
     greenSnake.setControls()
 
 let food = new Food()
@@ -18,6 +18,9 @@ function main(frame) {
     previousFrame = frame
     
     onFood()
+
+    console.log(greenSnake.bodyID)
+    console.log(greenSnake.bodyLength)
 
     countScore()
     greenSnake.move()
@@ -41,6 +44,7 @@ function isCollision(asset1, asset2) {
 function onFood() {
     if (isCollision(greenSnake.body, food.coords)) {
         food.reset()
+        greenSnake.isEating = true
     }
 }
 

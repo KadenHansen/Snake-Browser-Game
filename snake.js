@@ -5,12 +5,13 @@ export class Snake {
         this.bodyLength = 0
         this.speed = speed
         this.direction = { x: 0, y: 0 }
+        this.isEating = false
     }
     
     create() {
         let gameWorld = document.querySelector(".game-world")
-        this.removeLast()
-            
+
+        
         this.body.forEach(snakePiece => {
             let snakeSection = document.createElement("div")
             snakeSection.style.gridRowStart = snakePiece.y
@@ -22,14 +23,23 @@ export class Snake {
     }
     
     move() {
+        if (this.isEating === false) {
+            this.removeLast()
+        }else {
+            this.growSnake()
+        }
+        this.isEating = false
+
         if (this.direction.x !== 0 || this.direction.y !== 0) {
             for (let i = this.body.length - 2; i >= 0; i--) {
                 this.body[i + 1] = this.body[i]
             }
+            this.bodyID++
         }
-            
+        
         this.body[0].x += this.direction.x
         this.body[0].y += this.direction.y
+
     }
     
     setControls() {
@@ -67,6 +77,10 @@ export class Snake {
         }
     }
 
+    growSnake() {
+        this.bodyLength++
+    }
+
     reset() {
         let snakePieces = document.querySelectorAll(".snake")
         snakePieces.forEach(segment => {
@@ -75,5 +89,7 @@ export class Snake {
 
         this.body = [{ x: 13, y: 13 }]
         this.direction = { x: 0, y: 0 }
+        this.bodyID = 0
+        this.bodyLength = 0
     }
 }
