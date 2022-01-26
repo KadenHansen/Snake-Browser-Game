@@ -1,14 +1,11 @@
 import { Snake } from "./snake.js"
 import { Food } from "./food.js"
 
-const greenSnake = new Snake(4)
+const greenSnake = new Snake(3)
     greenSnake.setControls()
 
 let food = new Food()
-food.reset()
-    // let newCoords = food.getNewCoords()
-    // food.coords = { x: newCoords.x, y: newCoords.y }
-    // food.create()
+    food.reset()
 
 let currentFrame = 0
 let previousFrame = 0
@@ -43,7 +40,6 @@ function isCollision(asset1, asset2) {
 
 function onFood() {
     if (isCollision(greenSnake.body, food.coords)) {
-
         food.reset()
     }
 }
