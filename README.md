@@ -6,3 +6,6 @@ This is a basic snake game made with vanilla Javascript, CSS, and HTML.
 - Steer the snake into the food tiles (randomly spawning around the map) to grow snake
 - Avoid hitting any edge of the gray play area or any other segement of the grown snake body
 - Score one point for each piece of food the snake eats
+### Game Link
+Play the game here:
+https://kadenhansen.github.io/Snake-Browser-Game/
