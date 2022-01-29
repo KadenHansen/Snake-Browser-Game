@@ -1,8 +1,9 @@
 export class Snake {
     constructor(speed) {
-        this.body = [{ x: 13, y: 13 }]
+        this.body = { x: 13, y: 13 }
         this.bodyID = 0
         this.bodyLength = 0
+        this.bodyArr = []
         this.speed = speed
         this.direction = { x: 0, y: 0 }
         this.isEating = false
@@ -11,15 +12,13 @@ export class Snake {
     create() {
         let gameWorld = document.querySelector(".game-world")
 
-        
-        this.body.forEach(snakePiece => {
             let snakeSection = document.createElement("div")
-            snakeSection.style.gridRowStart = snakePiece.y
-            snakeSection.style.gridColumnStart = snakePiece.x
+            snakeSection.style.gridRowStart = this.body.y
+            snakeSection.style.gridColumnStart = this.body.x
             snakeSection.classList.add("snake")
             snakeSection.setAttribute("id", `${this.bodyID}`)
-            gameWorld.append(snakeSection)
-        })
+            
+        gameWorld.append(snakeSection)
     }
     
     move() {
@@ -31,14 +30,11 @@ export class Snake {
         this.isEating = false
 
         if (this.direction.x !== 0 || this.direction.y !== 0) {
-            for (let i = this.body.length - 2; i >= 0; i--) {
-                this.body[i + 1] = this.body[i]
-            }
             this.bodyID++
         }
         
-        this.body[0].x += this.direction.x
-        this.body[0].y += this.direction.y
+        this.body.x += this.direction.x
+        this.body.y += this.direction.y
 
     }
     
@@ -65,6 +61,16 @@ export class Snake {
         })
     }
 
+    determineBody() {
+        let snakePieces = document.querySelectorAll(".snake")
+        let snakeBody = Array.from(snakePieces)
+        this.bodyArr = []
+        for (let i = 1; i < snakeBody.length; i++) {
+            let coords = {x: parseInt(snakeBody[i].style.gridColumnStart), y: parseInt(snakeBody[i].style.gridRowStart)}
+            this.bodyArr.push(coords)
+        }
+    }
+
     removeLast() {
         if (this.bodyID !== 0) {
             let oldSnakePiece = document.getElementById(`${this.bodyID - this.bodyLength}`)
@@ -87,7 +93,7 @@ export class Snake {
             segment.remove()
         })
 
-        this.body = [{ x: 13, y: 13 }]
+        this.body = { x: 13, y: 13 }
         this.direction = { x: 0, y: 0 }
         this.bodyID = 0
         this.bodyLength = 0

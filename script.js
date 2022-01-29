@@ -1,7 +1,7 @@
 import { Snake } from "./snake.js"
 import { Food } from "./food.js"
 
-const greenSnake = new Snake(10)
+const greenSnake = new Snake(5)
     greenSnake.setControls()
 
 let food = new Food()
@@ -26,6 +26,7 @@ function main() {
     greenSnake.move()
     greenSnake.create()
     checkLose()
+    greenSnake.determineBody()
 }
 
 function countScore() {
@@ -34,7 +35,11 @@ function countScore() {
     scoreDisplay.innerHTML = `Score: ${score}`
 }
 
-export function isCollision(asset1, asset2) {
+function isCollision(asset1, asset2) {
+    return (asset1.x === asset2.x && asset1.y === asset2.y)
+}
+
+function isCollisionArr(asset1, asset2) {
     return asset1.some(segment => {
         return (segment.x === asset2.x && segment.y === asset2.y)
     })
@@ -49,10 +54,11 @@ function checkEating() {
 
 function checkLose() {
     if (
-        greenSnake.body[0].x <= 0 ||
-        greenSnake.body[0].x > 25 ||
-        greenSnake.body[0].y <= 0 ||
-        greenSnake.body[0].y > 25
+        greenSnake.body.x <= 0 ||
+        greenSnake.body.x > 25 ||
+        greenSnake.body.y <= 0 ||
+        greenSnake.body.y > 25 ||
+        isCollisionArr(greenSnake.bodyArr, greenSnake.body)
     ) {
         greenSnake.reset()
         food.reset()
