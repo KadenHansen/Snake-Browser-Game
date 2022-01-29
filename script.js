@@ -1,7 +1,7 @@
 import { Snake } from "./snake.js"
 import { Food } from "./food.js"
 
-const greenSnake = new Snake(5)
+const greenSnake = new Snake(10)
     greenSnake.setControls()
 
 let food = new Food()
@@ -22,17 +22,10 @@ window.requestAnimationFrame(update)
 
 function main() {
     checkEating()
-    countScore()
     greenSnake.move()
     greenSnake.create()
     checkLose()
     greenSnake.determineBody()
-}
-
-function countScore() {
-    let scoreDisplay = document.querySelector(".score")
-    let score = greenSnake.bodyLength
-    scoreDisplay.innerHTML = `Score: ${score}`
 }
 
 function isCollision(asset1, asset2) {
@@ -60,7 +53,22 @@ function checkLose() {
         greenSnake.body.y > 25 ||
         isCollisionArr(greenSnake.bodyArr, greenSnake.body)
     ) {
-        greenSnake.reset()
-        food.reset()
+        onLose()
     }
+}
+
+function onLose() {
+    let loseScreen = document.querySelector(".lose-screen")
+    let scoreDisplay = document.querySelector(".score")
+    let score = greenSnake.bodyLength
+    scoreDisplay.innerHTML = `Score: ${score}`
+    loseScreen.classList.remove("hide")
+    scoreDisplay.classList.remove("hide")
+    greenSnake.reset()
+    food.reset()
+
+    setTimeout(() => {
+        loseScreen.classList.add("hide")
+        scoreDisplay.classList.add("hide")
+    }, 5000)
 }

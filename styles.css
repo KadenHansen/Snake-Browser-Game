@@ -2,6 +2,11 @@
     user-select: none;
 }
 
+.hide {
+    display: none;
+    z-index: -1;
+}
+
 body {
     height: 100vh;
     width: 100vw;
@@ -14,8 +19,16 @@ body {
 
 .score {
     color: white;
+    display: flex;
     position: absolute;
-    top: 0;
+    width: 100%;
+    height: 5%;
+    top: 70vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+    background-color: black;
+    justify-content: center;
+    align-items: center;
 }
 
 .game-world {
@@ -35,4 +48,20 @@ body {
 .food {
     border: 0.2em solid black;
     background-color: greenyellow;
+}
+
+.lose-screen {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 30%;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+    background-color: black;
+    justify-content: center;
+    align-items: center;
+    color: #4F0001;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: xx-large;
 }
