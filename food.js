@@ -21,10 +21,10 @@ export class Food {
     }
 
     getNewCoords() {
-        return {
-            x: Math.floor(Math.random() * this.gridSize + 1),
-            y: Math.floor(Math.random() * this.gridSize + 1)
-        }
+            return {
+                x: Math.floor(Math.random() * this.gridSize + 1),
+                y: Math.floor(Math.random() * this.gridSize + 1)
+            }
     }
 
     reset() {

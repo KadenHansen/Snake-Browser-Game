@@ -1,7 +1,7 @@
 import { Snake } from "./snake.js"
 import { Food } from "./food.js"
 
-const greenSnake = new Snake(5)
+const greenSnake = new Snake(10)
     greenSnake.setControls()
 
 let food = new Food()
@@ -10,22 +10,23 @@ let food = new Food()
 let currentFrame = 0
 let previousFrame = 0
 
-// basic format for update loop from https://www.sitepoint.com/quick-tip-game-loop-in-javascript/
-function main(frame) {
-    window.requestAnimationFrame(main)
+function update(frame) {
+    window.requestAnimationFrame(update)
     currentFrame = (frame - previousFrame) / 1000
     if (currentFrame < 1 / greenSnake.speed) return
     
     previousFrame = frame
-    
-    onFood()
+    main()
+}
+window.requestAnimationFrame(update)
 
+function main() {
+    checkEating()
     countScore()
     greenSnake.move()
     greenSnake.create()
     checkLose()
 }
-window.requestAnimationFrame(main)
 
 function countScore() {
     let scoreDisplay = document.querySelector(".score")
@@ -33,13 +34,13 @@ function countScore() {
     scoreDisplay.innerHTML = `Score: ${score}`
 }
 
-function isCollision(asset1, asset2) {
+export function isCollision(asset1, asset2) {
     return asset1.some(segment => {
         return (segment.x === asset2.x && segment.y === asset2.y)
     })
 }
 
-function onFood() {
+function checkEating() {
     if (isCollision(greenSnake.body, food.coords)) {
         food.reset()
         greenSnake.isEating = true
